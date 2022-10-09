@@ -35,10 +35,6 @@ double [,] workArray = new double [m,n];
 CreateRandomArray(workArray);
 Console.WriteLine();
 
-//Console.WriteLine(workArray[0,2]);
-
-
-
 
 // Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, 
 // и возвращает значение этого элемента или же указание, что такого элемента нет.
@@ -51,13 +47,13 @@ Console.WriteLine();
 
 
 // если ищем позицию как указано в тексте задания
-// Console.Write("Укажите позицию элемента в двумерном массиве: ");
-// int pos = Convert.ToInt32(Console.ReadLine());
-// int a = pos/10-1;
-// int b = pos%10-1;
+Console.Write("Укажите позицию элемента в двумерном массиве (строку/столбец): ");
+int pos = Convert.ToInt32(Console.ReadLine());
+int a = pos/10-1;
+int b = pos%10-1;
 
-// if ((a<m) && (b<n)) Console.WriteLine($"Значение элемента двумерного массива на позиции (строка {a} , столбец {b}):  {workArray[a,b]}");
-// else Console.WriteLine($"Значение элемента двумерного массива на позиции (строка {a} , столбец {b}):  отсутствует.");
+if ((a<workArray.GetLength(0)) && (b<workArray.GetLength(1))) Console.WriteLine($"Значение элемента двумерного массива на позиции {pos}:  {workArray[a,b]}");
+else Console.WriteLine($"Значение элемента двумерного массива на позиции {pos} :  отсутствует.");
 
 
 
@@ -70,8 +66,22 @@ Console.WriteLine();
 
 double[] MediumNum = new double [n];
 
-for (int i = 0; i < n; i++)
+for ( int j =0; j<workArray.GetLength(1); j++)
 {
-    MediumNum[i] = Math.Round(((workArray[0,i]+workArray[1,i]+workArray[2,i])/m),2);
-    Console.Write($"{MediumNum[i]}; ");
+    double summ = 0;
+    for (int i = 0; i< workArray.GetLength(0); i++)
+    {
+        summ += workArray[i,j];
+    }
+    
+    MediumNum[j] = Math.Round((summ/workArray.GetLength(0)),2);
+    Console.Write($" {MediumNum[j]} ;");
 }
+
+
+// первое решение
+// for (int i = 0; i < n; i++)
+// {
+//     MediumNum[i] = Math.Round(((workArray[0,i]+workArray[1,i]+workArray[2,i])/m),2);
+//     Console.Write($"{MediumNum[i]}; ");
+// }
